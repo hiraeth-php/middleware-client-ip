@@ -13,9 +13,6 @@
         "hiraeth/app": "^2.0",
         "middlewares/client-ip": "^1.2"
     },
-    "autoload": {
-        "classmap": ["src/"]
-    },
     "type": "opus-package",
     "extra": {
         "opus": {
