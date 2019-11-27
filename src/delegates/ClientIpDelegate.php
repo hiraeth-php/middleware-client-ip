@@ -40,7 +40,11 @@ class ClientIpDelegate implements Hiraeth\Delegate
 			]
 		]);
 
-		$instance->proxy($options['proxies'], $options['headers']);
+		$instance->attribute($options['attribute']);
+
+		if ($options['proxies']) {
+			$instance->proxy($options['proxies'], $options['headers']);
+		}
 
 		return $instance;
 	}
