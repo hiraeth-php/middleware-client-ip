@@ -8,8 +8,25 @@ use Middlewares\ClientIp;
 /**
  * {@inheritDoc}
  */
-class ClientIpDelegate implements Hiraeth\Delegate
+class ClientIpDelegate extends AbstractDelegate
 {
+	/**
+	 * {@inheritDoc}
+	 */
+	protected static $defaultOptions = [
+		'attribute' => '_client-ip',
+		'proxies'   => [],
+		'headers'   => [
+			'Forwarded',
+			'Forwarded-For',
+			'X-Forwarded',
+			'X-Forwarded-For',
+			'X-Cluster-Client-Ip',
+			'Client-Ip'
+		]
+	];
+
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -24,21 +41,8 @@ class ClientIpDelegate implements Hiraeth\Delegate
 	 */
 	public function __invoke(Hiraeth\Application $app): object
 	{
-		$instance   = new ClientIp();
-		$middleware = $app->getConfig('*', 'middleware.class', NULL);
-		$collection = array_search(ClientIp::class, $middleware);
-		$options    = $app->getConfig($collection, 'middleware', [
-			'attribute' => '_client-ip',
-			'proxies'   => [],
-			'headers'   => [
-				'Forwarded',
-				'Forwarded-For',
-				'X-Forwarded',
-				'X-Forwarded-For',
-				'X-Cluster-Client-Ip',
-				'Client-Ip'
-			]
-		]);
+		$instance = new ClientIp();
+		$options  = $this->getOptions();
 
 		$instance->attribute($options['attribute']);
 

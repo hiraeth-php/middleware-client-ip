@@ -18,29 +18,31 @@
 
 	class = Middlewares\ClientIp
 
-	;
-	; The name of the attribute to store the client-ip on
-	;
+	[&.options]
 
-	attribute = _client-ip
+		;
+		; The name of the attribute to store the client-ip on
+		;
 
-	;
-	; A list of proxies to trust headers from
-	;
+		attribute = _client-ip
 
-	proxies = [
+		;
+		; A list of proxies to trust headers from
+		;
 
-	]
+		proxies = [
 
-	;
-	; A list of headers to trust
-	;
+		]
 
-	headers = [
-		"Forwarded",
-		"Forwarded-For",
-		"X-Forwarded",
-		"X-Forwarded-For",
-		"X-Cluster-Client-Ip",
-		"Client-Ip"
-	]
+		;
+		; A list of headers to trust
+		;
+
+		headers = [
+			"Forwarded",
+			"Forwarded-For",
+			"X-Forwarded",
+			"X-Forwarded-For",
+			"X-Cluster-Client-Ip",
+			"Client-Ip"
+		]
